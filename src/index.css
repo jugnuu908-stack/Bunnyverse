@@ -1,0 +1,259 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --font-hand: "Caveat", cursive;
+
+  --color-night-950: #0a0214;
+  --color-night-900: #140725;
+  --color-night-800: #1d0b36;
+  --color-night-700: #2a1150;
+  --color-night-600: #3b1a6e;
+
+  --color-bora-200: #e9d5ff;
+  --color-bora-300: #d8b4fe;
+  --color-bora-400: #c084fc;
+  --color-bora-500: #a855f7;
+  --color-bora-600: #9333ea;
+  --color-bora-700: #7e22ce;
+
+  --animate-spin-slow: spin 16s linear infinite;
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-slow: float 11s ease-in-out infinite;
+  --animate-pulse-glow: pulseGlow 2.8s ease-in-out infinite;
+  --animate-shine: shine 4s linear infinite;
+  --animate-heart-fall: heartFall 5s linear forwards;
+  --animate-wiggle: wiggle 2.4s ease-in-out infinite;
+  --animate-pop-in: popIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  --animate-bob: bob 3.5s ease-in-out infinite;
+  --animate-eq: eq 0.8s ease-in-out infinite;
+  --animate-heartbeat: heartbeat 1.6s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-18px) rotate(3deg); }
+}
+@keyframes bob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+@keyframes pulseGlow {
+  0%, 100% { box-shadow: 0 0 24px rgba(168, 85, 247, 0.35); }
+  50% { box-shadow: 0 0 60px rgba(236, 72, 153, 0.65); }
+}
+@keyframes shine {
+  from { background-position: 200% center; }
+  to { background-position: -200% center; }
+}
+@keyframes heartFall {
+  0% { transform: translateY(-12vh) rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  100% { transform: translateY(112vh) rotate(360deg); opacity: 0.9; }
+}
+@keyframes wiggle {
+  0%, 100% { transform: rotate(-5deg); }
+  50% { transform: rotate(5deg); }
+}
+@keyframes popIn {
+  0% { transform: scale(0.4); opacity: 0; }
+  100% { transform: scale(1); opacity: 1; }
+}
+@keyframes eq {
+  0%, 100% { transform: scaleY(0.25); }
+  50% { transform: scaleY(1); }
+}
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.25); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.18); }
+  70% { transform: scale(1); }
+}
+@keyframes orbitSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.25; transform: scale(0.8); }
+  50% { opacity: 1; transform: scale(1.25); }
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--color-night-950);
+  color: #f5f0ff;
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+::selection {
+  background: #a855f7;
+  color: #fff;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: #140725;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#7e22ce, #ec4899);
+  border-radius: 8px;
+}
+
+/* ---- custom helpers ---- */
+.glass {
+  background: transparent;
+  border: 1px solid rgba(216, 180, 254, 0.18);
+  box-shadow: 0 10px 30px rgba(10, 2, 20, 0.3);
+}
+
+.text-shine {
+  background: linear-gradient(110deg, #c084fc, #f0abfc, #a855f7, #f472b6, #c084fc);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 5s linear infinite;
+}
+
+.btn-bora {
+  background: linear-gradient(100deg, #7e22ce, #a855f7 45%, #ec4899);
+  background-size: 160% auto;
+  transition: all 0.35s ease;
+  box-shadow: 0 8px 30px rgba(168, 85, 247, 0.35);
+}
+.btn-bora:hover {
+  background-position: right center;
+  box-shadow: 0 10px 44px rgba(236, 72, 153, 0.55);
+  transform: translateY(-2px);
+}
+
+/* ---- memory card 3d flip ---- */
+.flip-scene {
+  perspective: 900px;
+}
+.flip-inner {
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.4, 0.2, 0.2, 1);
+}
+.flip-inner.flipped {
+  transform: rotateY(180deg);
+}
+.flip-face {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  position: absolute;
+  inset: 0;
+}
+.flip-back-face {
+  transform: rotateY(180deg);
+}
+
+/* ---- heart pop game shake ---- */
+.shake {
+  animation: shake 0.4s ease-in-out;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20% { transform: translateX(-8px); }
+  40% { transform: translateX(8px); }
+  60% { transform: translateX(-6px); }
+  80% { transform: translateX(6px); }
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ---- floating memory universe background ---- */
+@keyframes memoryFloat {
+  0%, 100% { transform: translateY(-12px) rotate(-2.5deg); }
+  50% { transform: translateY(12px) rotate(2.5deg); }
+}
+@keyframes mistDrift {
+  0%, 100% { transform: translate3d(-3%, 0, 0) scale(1); }
+  50% { transform: translate3d(3%, -2%, 0) scale(1.07); }
+}
+@keyframes noteFloat {
+  0%, 100% { transform: translateY(0) rotate(-8deg); opacity: 0.35; }
+  50% { transform: translateY(-18px) rotate(8deg); opacity: 0.85; }
+}
+.memory-anim {
+  animation: memoryFloat 16s ease-in-out -8s infinite alternate;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .memory-anim,
+  .memory-anim *,
+  .mem-static {
+    animation: none !important;
+  }
+}
+
+/* ============================================================
+   3D DEPTH SYSTEM — visual-only transformation.
+   The same website, lifted into a soft 3D environment.
+   ============================================================ */
+
+/* cards that float toward the viewer */
+.lift {
+  transform: translateZ(0);
+  transition:
+    transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.5s ease;
+  box-shadow: 0 14px 36px rgba(10, 2, 20, 0.45);
+}
+.lift:hover {
+  transform: perspective(900px) translateY(-6px) translateZ(18px) rotateX(0.6deg);
+  box-shadow:
+    0 28px 64px rgba(10, 2, 20, 0.6),
+    0 10px 34px rgba(168, 85, 247, 0.22);
+}
+
+/* buttons physically press inward when clicked */
+.btn-bora {
+  transform: translateZ(0);
+}
+.btn-bora:active {
+  transform: translateY(2px) scale(0.96);
+  box-shadow: 0 4px 14px rgba(168, 85, 247, 0.3);
+}
+.glass:active {
+  transform: scale(0.985);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lift,
+  .lift:hover,
+  .btn-bora:active,
+  .glass:active {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+/* ---- 3D gallery floating cards ---- */
+@keyframes galleryFloat {
+  0%, 100% { transform: translateY(-6px); }
+  50% { transform: translateY(6px); }
+}
+.gallery-float {
+  animation: galleryFloat 9s ease-in-out infinite;
+  will-change: transform;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gallery-float {
+    animation: none !important;
+  }
+}
